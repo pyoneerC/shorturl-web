@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center my-5">URL Shortener</h1>
+        <form id="shortenForm">
+            <div class="form-group">
+                <label for="url">Enter URL to shorten:</label>
+                <input type="text" class="form-control" id="url" placeholder="Enter your URL here" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Shorten</button>
+        </form>
+        <div class="mt-4" id="result" style="display: none;">
+            <h5>Your short URL is:</h5>
+            <a id="shortUrl" href="#" target="_blank"></a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('shortenForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const url = document.getElementById('url').value;
+            fetch('/shorten', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: url })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('shortUrl').innerText = `${window.location.origin}/` + data.short_code;
+                document.getElementById('shortUrl').href = `${window.location.origin}/` + data.short_code;
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
