@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Info</title>
+</head>
+<body>
+    <h1>Short URL Info</h1>
+
+    <p><strong>Short Code:</strong> {{ data.short_code }}</p>
+    <p><strong>Original URL:</strong> <a href="{{ data.original_url }}">{{ data.original_url }}</a></p>
+    <p><strong>Created At:</strong> {{ data.created_at }}</p>
+    <p><strong>Last Updated At:</strong> {{ data.last_updated_at }}</p>
+    <p><strong>Expiration Date:</strong> {{ data.expiration_date }}</p>
+    <p><strong>Access Count:</strong> {{ data.access_count }}</p>
+</body>
+</html>

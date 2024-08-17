@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Shortener</title>
+    <title>Register</title>
 </head>
 <body>
-    <h1>URL Shortener</h1>
+    <h1>Register</h1>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -18,10 +18,12 @@
       {% endif %}
     {% endwith %}
 
-    <form action="{{ url_for('shorten_url') }}" method="POST">
-        <label for="url">Enter a URL to shorten:</label>
-        <input type="url" name="url" id="url" required>
-        <button type="submit">Shorten</button>
+    <form action="{{ url_for('register') }}" method="POST">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+        <button type="submit">Register</button>
     </form>
 </body>
 </html>
