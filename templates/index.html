@@ -23,5 +23,23 @@
         <input type="url" name="url" id="url" required>
         <button type="submit">Shorten</button>
     </form>
+    
+    <div style="margin-top: 20px;">
+        <label for="short_code_input">Enter the short code to view info:</label>
+        <input type="text" id="short_code_input" required>
+        <button type="button" onclick="redirectToInfo()">View Info</button>
+    </div>
+
+    <script>
+        function redirectToInfo() {
+            const shortCode = document.getElementById('short_code_input').value;
+            if (shortCode) {
+                window.location.href = `{{ url_for('url_info', short_code='') }}${shortCode}`;
+            } else {
+                alert('Please enter a short code.');
+            }
+        }
+    </script>
+
 </body>
 </html>
