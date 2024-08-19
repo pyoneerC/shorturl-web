@@ -10,7 +10,7 @@ A streamlined and user-friendly web application designed for shortening URLs, bu
 - **URL Shortening**: Quickly generate shortened versions of any valid URL.
 - **Redirection**: Seamless redirection to the original URL when a shortened link is accessed.
 - **URL Information**: Access detailed information about shortened URLs, including the number of times they've been accessed.
-- **URL Deletion**: Easily delete shortened URLs that are no longer needed.
+- **URL Deletion**: Delete shortened URLs that are no longer needed.
 - **URL Update**: Update the destination of existing shortened URLs with ease.
 
 ## Getting Started
