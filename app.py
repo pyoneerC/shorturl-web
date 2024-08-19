@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 import requests
 
 app = Flask(__name__)
@@ -65,6 +65,24 @@ def delete_url(short_code):
         flash('Failed to delete the URL', 'danger')
 
     return redirect(url_for('shorten_url'))
+
+
+@app.route('/update/<short_code>', methods=['POST'])
+def update_url(short_code):
+    if request.method == 'POST':
+        data = request.get_json()
+        new_url = data.get('url')
+
+        try:
+            response = requests.put(
+                f"https://url-shortener-backend-xzs2.onrender.com/shorten/{short_code}",
+                json={"url": new_url}
+            )
+            response.raise_for_status()
+            return jsonify({"message": "URL updated successfully"}), 200
+        except requests.RequestException:
+            return jsonify({"message": "Failed to update the URL"}), 400
+
 
 
 if __name__ == '__main__':

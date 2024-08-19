@@ -175,6 +175,13 @@ button:hover {
             <button type="button" onclick="deleteShortenedUrl()">Delete</button>
         </div>
 
+    <div style="margin-top: 20px;">
+        <label for="update_short_code_input">Update the shortened URL (shortcode):</label>
+        <input type="text" id="update_short_code_code" required>
+        <input type="text" id="update_short_code_url" required>
+        <button type="button" onclick="updateShortenedUrl()">Update</button>
+    </div>
+
     <p>
         Hecho por <a href="https://maxcomperatore.com" target="_blank">Max Comperatore</a>.
         Ver en <a href="https://github.com/pyoneerC/shorturl-web" target="_blank">GitHub</a>.
@@ -225,6 +232,33 @@ button:hover {
                 alert('Please enter a short code.');
             }
         }
+
+        function updateShortenedUrl() {
+        const shortCode = document.getElementById('update_short_code_input').value;
+        const newUrl = document.getElementById('update_short_code_url').value;
+
+        if (shortCode && newUrl) {
+            fetch(`{{ url_for('update_url', short_code='') }}${shortCode}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url: newUrl }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('URL updated successfully!');
+                } else {
+                    alert('Failed to update the URL.');
+                }
+            })
+            .catch(error => {
+                alert('Failed to update the URL.');
+            });
+        } else {
+            alert('Please enter both the short code and the new URL.');
+        }
+    }
     </script>
 </body>
 </html>
