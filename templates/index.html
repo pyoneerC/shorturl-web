@@ -23,7 +23,14 @@
         <input type="url" name="url" id="url" required>
         <button type="submit">Shorten</button>
     </form>
-    
+
+    <div id="shortened_url_section" style="margin-top: 20px; display: none;">
+        <label for="shortened_url">Your shortened URL:</label>
+        <input type="text" id="shortened_url" readonly>
+        <button type="button" onclick="copyToClipboard()">Copy</button>
+        <button type="button" onclick="goToUrl()">Go to URL</button>
+    </div>
+
     <div style="margin-top: 20px;">
         <label for="short_code_input">Enter the short code to view info:</label>
         <input type="text" id="short_code_input" required>
@@ -31,6 +38,20 @@
     </div>
 
     <script>
+        function copyToClipboard() {
+            const urlField = document.getElementById('shortened_url');
+            urlField.select();
+            document.execCommand('copy');
+            alert('URL copied to clipboard!');
+        }
+
+        function goToUrl() {
+            const urlField = document.getElementById('shortened_url').value;
+            if (urlField) {
+                window.location.href = urlField;
+            }
+        }
+
         function redirectToInfo() {
             const shortCode = document.getElementById('short_code_input').value;
             if (shortCode) {
@@ -39,7 +60,15 @@
                 alert('Please enter a short code.');
             }
         }
-    </script>
+        
+        function displayShortenedUrl(shortenedUrl) {
+            const shortenedUrlSection = document.getElementById('shortened_url_section');
+            const urlField = document.getElementById('shortened_url');
 
+            urlField.value = shortenedUrl;
+            shortenedUrlSection.style.display = 'block';
+        }
+
+    </script>
 </body>
 </html>
