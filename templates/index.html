@@ -4,37 +4,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL Shortener</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #111;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        input[type="url"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+
+        input[type="url"]:focus,
+        input[type="text"]:focus {
+            border-color: #333;
+            outline: none;
+        }
+
+        button {
+            background-color: #666;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .button-container button {
+            flex: 1;
+        }
+
+        #shortened_url_section {
+            margin-top: 20px;
+            display: none;
+            text-align: left;
+        }
+
+        #shortened_url_section label {
+            display: block;
+        }
+
+        .alert {
+            padding: 15px;
+            background-color: #f44336;
+            color: white;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .success {
+            background-color: #4CAF50;
+        }
+
+        .info {
+            background-color: #2196F3;
+        }
+
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .closebtn:hover {
+            color: black;
+        }
+    </style>
 </head>
 <body>
-    <h1>URL Shortener</h1>
+    <div class="container">
+        <h1>URL Shortener</h1>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <ul>
-        {% for category, message in messages %}
-          <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div>
+            {% for category, message in messages %}
+              <div class="alert {{ category }}">{{ message }}
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+              </div>
+            {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
 
-    <form action="{{ url_for('shorten_url') }}" method="POST">
-        <label for="url">Enter a URL to shorten:</label>
-        <input type="url" name="url" id="url" required>
-        <button type="submit">Shorten</button>
-    </form>
+        <form action="{{ url_for('shorten_url') }}" method="POST">
+            <label for="url">Enter a URL to shorten:</label>
+            <input type="url" name="url" id="url" required>
+            <button type="submit">Shorten</button>
+        </form>
 
-    <div id="shortened_url_section" style="margin-top: 20px; display: none;">
-        <label for="shortened_url">Your shortened URL:</label>
-        <input type="text" id="shortened_url" readonly>
-        <button type="button" onclick="copyToClipboard()">Copy</button>
-        <button type="button" onclick="goToUrl()">Go to URL</button>
-    </div>
+        <div id="shortened_url_section">
+            <label for="shortened_url">Your shortened URL:</label>
+            <input type="text" id="shortened_url" readonly>
+            <div class="button-container">
+                <button type="button" onclick="copyToClipboard()">Copy</button>
+                <button type="button" onclick="goToUrl()">Go to URL</button>
+            </div>
+        </div>
 
-    <div style="margin-top: 20px;">
-        <label for="short_code_input">Enter the short code to view info:</label>
-        <input type="text" id="short_code_input" required>
-        <button type="button" onclick="redirectToInfo()">View Info</button>
+        <div style="margin-top: 20px;">
+            <label for="short_code_input">Enter the short code to view info:</label>
+            <input type="text" id="short_code_input" required>
+            <button type="button" onclick="redirectToInfo()">View Info</button>
+        </div>
     </div>
 
     <script>
@@ -60,7 +186,7 @@
                 alert('Please enter a short code.');
             }
         }
-        
+
         function displayShortenedUrl(shortenedUrl) {
             const shortenedUrlSection = document.getElementById('shortened_url_section');
             const urlField = document.getElementById('shortened_url');
@@ -68,7 +194,6 @@
             urlField.value = shortenedUrl;
             shortenedUrlSection.style.display = 'block';
         }
-
     </script>
 </body>
 </html>
