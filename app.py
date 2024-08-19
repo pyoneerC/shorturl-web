@@ -25,6 +25,8 @@ def shorten_url():
         except requests.RequestException as e:
             flash(f'Error: {e}', 'danger')
 
+        return redirect(url_for('shorten_url'))
+
     return render_template('index.html')
 
 
