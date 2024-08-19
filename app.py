@@ -39,6 +39,7 @@ def redirect_to_url(short_code):
         flash('Invalid short URL', 'danger')
         return redirect(url_for('shorten_url'))
 
+access_count = 0
 
 @app.route('/shorten/<short_code>')
 def url_info(short_code):
@@ -46,8 +47,10 @@ def url_info(short_code):
         response = requests.get(f"https://url-shortener-backend-xzs2.onrender.com/shorten/{short_code}")
         response.raise_for_status()
         url_data = response.json()
+        global access_count
+        access_count += 1
 
-        return render_template('url_info.html', data=url_data)
+        return render_template('url_info.html', data=url_data, access_count=access_count)
     except requests.RequestException:
         flash('Invalid short URL', 'danger')
         return redirect(url_for('shorten_url'))
