@@ -5,124 +5,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL Shortener</title>
     <style>
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-        .container {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-        }
+.container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
 
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #111;
-        }
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #111;
+}
 
-        label {
-            font-size: 14px;
-            color: #555;
-            display: block;
-            margin-bottom: 5px;
-            text-align: left;
-        }
+label {
+    font-size: 14px;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+    text-align: center;
+}
 
-        input[type="url"],
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            margin-bottom: 15px;
-            font-size: 16px;
-            transition: border 0.3s ease;
-        }
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-        input[type="url"]:focus,
-        input[type="text"]:focus {
-            border-color: #333;
-            outline: none;
-        }
+input[type="url"],
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
 
-        button {
-            background-color: #666;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+input[type="url"]:focus,
+input[type="text"]:focus {
+    border-color: #333;
+    outline: none;
+}
 
-        button:hover {
-            background-color: #555;
-        }
+button {
+    background-color: #666;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-        }
+button:hover {
+    background-color: #555;
+}
 
-        .button-container button {
-            flex: 1;
-        }
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
 
-        #shortened_url_section {
-            margin-top: 20px;
-            display: none;
-            text-align: left;
-        }
+.button-container button {
+    flex: 1;
+}
 
-        #shortened_url_section label {
-            display: block;
-        }
+#shortened_url_section {
+    margin-top: 20px;
+    display: none;
+    text-align: left;
+}
 
-        .alert {
-            padding: 15px;
-            background-color: #f44336;
-            color: white;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
+#shortened_url_section label {
+    display: block;
+    text-align: center;
+}
 
-        .success {
-            background-color: #4CAF50;
-        }
+.alert {
+    padding: 15px;
+    background-color: #f44336;
+    color: white;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
 
-        .info {
-            background-color: #2196F3;
-        }
+.success {
+    background-color: #4CAF50;
+}
 
-        .closebtn {
-            margin-left: 15px;
-            color: white;
-            font-weight: bold;
-            float: right;
-            font-size: 22px;
-            line-height: 20px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+.info {
+    background-color: #2196F3;
+}
 
-        .closebtn:hover {
-            color: black;
-        }
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
     </style>
 </head>
 <body>
@@ -167,6 +174,11 @@
             <input type="text" id="delete_short_code_input" required>
             <button type="button" onclick="deleteShortenedUrl()">Delete</button>
         </div>
+
+    <p>
+        Hecho por <a href="https://maxcomperatore.com" target="_blank">Max Comperatore</a>.
+        Ver en <a href="https://github.com/pyoneerC/shorturl-web" target="_blank">GitHub</a>.
+    </p>
 
     </div>
 
