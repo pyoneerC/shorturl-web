@@ -234,19 +234,21 @@ button:hover {
         }
 
         function updateShortenedUrl() {
-        const shortCode = document.getElementById('update_short_code_input').value;
-        const newUrl = document.getElementById('update_short_code_url').value;
+    const shortCode = document.getElementById('update_short_code_code').value;
+    const newUrl = document.getElementById('update_short_code_url').value;
 
-        if (shortCode && newUrl) {
-            fetch(`{{ url_for('update_url', short_code='') }}${shortCode}`, {
+    if (shortCode && newUrl) {
+        if (confirm('Are you sure you want to update this shortened URL?')) {
+            fetch(`/update/${shortCode}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ url: newUrl }),
             })
-            .then(response => {
-                if (response.ok) {
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === "URL updated successfully") {
                     alert('URL updated successfully!');
                 } else {
                     alert('Failed to update the URL.');
@@ -255,10 +257,12 @@ button:hover {
             .catch(error => {
                 alert('Failed to update the URL.');
             });
-        } else {
-            alert('Please enter both the short code and the new URL.');
         }
+    } else {
+        alert('Please enter a short code and a new URL.');
     }
+}
+
     </script>
 </body>
 </html>
