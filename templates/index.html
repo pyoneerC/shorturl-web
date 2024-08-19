@@ -150,7 +150,7 @@ button:hover {
 
         <form action="{{ url_for('shorten_url') }}" method="POST">
             <label for="url">Enter a URL to shorten:</label>
-            <input type="url" name="url" id="url" required>
+            <input type="url" name="url" id="url" required placeholder="https://example.com">
             <button type="submit">Shorten</button>
         </form>
 
@@ -165,20 +165,20 @@ button:hover {
 
         <div style="margin-top: 20px;">
             <label for="view_short_code_input">Enter the short code to view info:</label>
-            <input type="text" id="view_short_code_input" required>
+            <input type="text" id="view_short_code_input" required placeholder="dc8cd8">
             <button type="button" onclick="redirectToInfo()">View Info</button>
         </div>
 
         <div style="margin-top: 20px;">
-            <label for="delete_short_code_input">Delete the shortened URL (shortcode):</label>
-            <input type="text" id="delete_short_code_input" required>
+            <label for="delete_short_code_input">Delete the shortened URL:</label>
+            <input type="text" id="delete_short_code_input" required placeholder="dc8cd8">
             <button type="button" onclick="deleteShortenedUrl()">Delete</button>
         </div>
 
     <div style="margin-top: 20px;">
-        <label for="update_short_code_input">Update the shortened URL (shortcode):</label>
+        <label for="update_short_code_input">Update the shortened URL:</label>
         <input type="text" id="update_short_code_code" required placeholder="dc8cd8" >
-        <input type="text" id="update_short_code_url" required placeholder="https://example.com" >
+        <input type="text" id="update_short_code_url" required placeholder="https://maxcomperatore.com">
         <button type="button" onclick="updateShortenedUrl()">Update</button>
     </div>
 
