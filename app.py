@@ -55,6 +55,17 @@ def url_info(short_code):
         flash('Invalid short URL', 'danger')
         return redirect(url_for('shorten_url'))
 
+@app.route('/delete/<short_code>')
+def delete_url(short_code):
+    try:
+        response = requests.delete(f"https://url-shortener-backend-xzs2.onrender.com/shorten/{short_code}")
+        response.raise_for_status()
+        flash('URL deleted successfully', 'success')
+    except requests.RequestException:
+        flash('Failed to delete the URL', 'danger')
+
+    return redirect(url_for('shorten_url'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
